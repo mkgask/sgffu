@@ -1,0 +1,3 @@
+[submodule "Assets/Plugins/UniRx"]
+	path = Assets/Plugins/UniRx
+	url = https://github.com/neuecc/UniRx
