@@ -1,3 +1,9 @@
 [submodule "Assets/Plugins/UniRx"]
 	path = Assets/Plugins/UniRx
-	url = https://github.com/neuecc/UniRx
+	url = https://github.com/neuecc/UniRx.git
+[submodule "Assets/Plugins/Utf8Json"]
+	path = Assets/Plugins/Utf8Json
+	url = https://github.com/neuecc/Utf8Json.git
+[submodule "Assets/Plugins/StringBuilderTemporary"]
+	path = Assets/Plugins/StringBuilderTemporary
+	url = https://github.com/wotakuro/StringBuilderTemporary
