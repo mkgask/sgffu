@@ -28,14 +28,14 @@ This project is a trial version before the alpha version.
 
 6. Open directory in unity and Build&Run.
 
-if you not find Configs directory or each under files, it will be created when you open the directory and Build&Run with Unity
+if you not find Configs directory or each under files, it will be created when you open the directory and Build&Run with Unity.  
 
 ### Control player
 
-It moves front, left, back, right with WASD.
+It moves front, left, back, right with WASD.  
 Can't do anything else.
 
-
+- - -
 
 ***注意事項***  
 このプロジェクトはα版以前の試作版です。
@@ -43,7 +43,7 @@ Can't do anything else.
 
 ### 用意するもの
 
-- Unity (Supported 5.6.1+)
+- Unity (バージョン5.6.1以降)
 - お気に入りのプレイヤーキャラのprefabまたはfbxファイル
 - Terrainに貼る地面テクスチャ
 
@@ -62,10 +62,10 @@ Can't do anything else.
 
 6. Unityでディレクトリを開き、Build & Run で動きます。
 
-（もしConfigsディレクトリやその中のファイルが見つからない場合、一旦UnityでBuild & Runすると生成されます）
+もしConfigsディレクトリやその中のファイルが見つからない場合、一旦UnityでBuild & Runすると生成されます。
 
 
 ### 操作方法
 
-WASDで前後左右に動きます。
+WASDで前後左右に動きます。  
 それ以外のことは出来ません。
