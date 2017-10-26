@@ -28,7 +28,10 @@ This project is a trial version before the alpha version.
 
 6. Open directory in unity and open bootStrap scene and Build&Run.
 
-if you not find Configs directory or each under files, it will be created when you open the directory and Build&Run with Unity.  
+If you not found Configs directory or each under files, it will be created when you open the directory and Build&Run with Unity.  
+
+And If you not found Assets/Plugins/ under each directory, please downloads each external library.  
+[UniRx](https://github.com/neuecc/UniRx) / [Utf8Json](https://github.com/neuecc/Utf8Json/releases) / [OptimizedStringOperation in StringBuilderTemporary](https://github.com/wotakuro/StringBuilderTemporary/tree/master/Assets/Scripts)
 
 
 ### Player control
@@ -64,6 +67,10 @@ Can't do anything else.
 6. Unityでディレクトリを開き、bootStrapシーンを開き、Build & Run で動きます。
 
 もしConfigsディレクトリやその中のファイルが見つからない場合、一旦UnityでBuild & Runすると生成されます。
+
+また、Windowsではsubmoduleに設定しているAssets/Pluginsディレクトリ以下の外部ライブラリがgit cloneで取得出来ないようです。  
+その場合は、それぞれダウンロードして導入してください。  
+[UniRx](https://github.com/neuecc/UniRx) / [Utf8Json](https://github.com/neuecc/Utf8Json/releases) / [OptimizedStringOperation in StringBuilderTemporary](https://github.com/wotakuro/StringBuilderTemporary/tree/master/Assets/Scripts)
 
 
 ### 操作方法
