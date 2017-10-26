@@ -10,7 +10,7 @@ This project is a trial version before the alpha version.
 ### Preparation
 
 - Unity (Supported 5.6.1+)
-- Your favorite player character prefab or fbx.
+- Your favorite player character prefab.
 - grounds texture.
 
 
@@ -18,7 +18,7 @@ This project is a trial version before the alpha version.
 
 1. Download this repository. (and extract)
 
-2. Copy your favorite player character prefab or fbx to "Assets/Resources/Character/player/" directory.
+2. Copy your favorite player character prefab (attach PlayerController.cs) to "Assets/Resources/Character/player/" directory.
 
 3. Copy grounds texture to "Assets/Resources/Terrain/Grounds/" directory.
 
@@ -26,16 +26,17 @@ This project is a trial version before the alpha version.
 
 5. Edit texture_filepath in "Configs/terrain.json".
 
-6. Open directory in unity and Build&Run.
+6. Open directory in unity and open bootStrap scene and Build&Run.
 
 if you not find Configs directory or each under files, it will be created when you open the directory and Build&Run with Unity.  
 
-### Control player
+
+### Player control
 
 It moves front, left, back, right with WASD.  
 Can't do anything else.
 
-- - -
+---
 
 ***注意事項***  
 このプロジェクトはα版以前の試作版です。
@@ -44,7 +45,7 @@ Can't do anything else.
 ### 用意するもの
 
 - Unity (バージョン5.6.1以降)
-- お気に入りのプレイヤーキャラのprefabまたはfbxファイル
+- お気に入りのプレイヤーキャラのprefabファイル
 - Terrainに貼る地面テクスチャ
 
 
@@ -52,7 +53,7 @@ Can't do anything else.
 
 1. このリポジトリをダウンロードしてください。（zipを落とした場合は解凍も）
 
-2. 用意したプレイヤーキャラのファイルを "Assets/Resources/Character/player/" ディレクトリにコピーしてください。
+2. 用意したプレイヤーキャラのファイルを "Assets/Resources/Character/player/" ディレクトリにコピーしてください。（PlayerController.csをアタッチしたprefabがベストです）
 
 3. 用意した地面のテクスチャを "Assets/Resources/Terrain/Grounds/" ディレクトリにコピーしてください。
 
@@ -60,7 +61,7 @@ Can't do anything else.
 
 5. "Configs/terrain.json" ファイルを開き、texture_filepath を編集してください。
 
-6. Unityでディレクトリを開き、Build & Run で動きます。
+6. Unityでディレクトリを開き、bootStrapシーンを開き、Build & Run で動きます。
 
 もしConfigsディレクトリやその中のファイルが見つからない場合、一旦UnityでBuild & Runすると生成されます。
 
