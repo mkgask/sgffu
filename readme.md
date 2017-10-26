@@ -16,7 +16,7 @@ This project is a trial version before the alpha version.
 
 ### Usage:
 
-1. Download this repository. (and extract)
+1. Download or "git clone --recursive" this repository. (and extract)
 
 2. Copy your favorite player character prefab (attach PlayerController.cs) to "Assets/Resources/Character/player/" directory.
 
@@ -54,7 +54,7 @@ Can't do anything else.
 
 ### 使い方
 
-1. このリポジトリをダウンロードしてください。（zipを落とした場合は解凍も）
+1. このリポジトリをダウンロードまたは"git clone --recursive"でクローンしてください。（zipを落とした場合は解凍も）
 
 2. 用意したプレイヤーキャラのファイルを "Assets/Resources/Character/player/" ディレクトリにコピーしてください。（PlayerController.csをアタッチしたprefabがベストです）
 
@@ -68,8 +68,7 @@ Can't do anything else.
 
 もしConfigsディレクトリやその中のファイルが見つからない場合、一旦UnityでBuild & Runすると生成されます。
 
-また、Windowsではsubmoduleに設定しているAssets/Pluginsディレクトリ以下の外部ライブラリがgit cloneで取得出来ないようです。  
-その場合は、それぞれダウンロードして導入してください。  
+git submoduleに設定しているAssets/Pluginsディレクトリ以下の外部ライブラリが取得出来ていない場合は、それぞれダウンロードして導入してください。  
 [UniRx](https://github.com/neuecc/UniRx) / [Utf8Json](https://github.com/neuecc/Utf8Json/releases) / [OptimizedStringOperation in StringBuilderTemporary](https://github.com/wotakuro/StringBuilderTemporary/tree/master/Assets/Scripts)
 
 
