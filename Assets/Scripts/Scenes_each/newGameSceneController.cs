@@ -5,7 +5,7 @@ using UniRx;
 using OwrBase.Config;
 using OwrBase.Utility;
 using OwrBase.Scene;
-using OwrBase.EventMessage;
+using OwrBase.SceneTransition;
 using OwrBase.World;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 

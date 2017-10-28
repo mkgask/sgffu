@@ -1,7 +1,7 @@
 using UnityEngine;
 using UniRx;
 using OwrBase.Scene;
-using OwrBase.EventMessage;
+using OwrBase.SceneTransition;
 
 public class quitSceneController : MonoBehaviour {
 /*

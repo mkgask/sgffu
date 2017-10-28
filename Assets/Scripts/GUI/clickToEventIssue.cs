@@ -1,6 +1,6 @@
 using UnityEngine;
 using UniRx;
-using OwrBase.EventMessage;
+using OwrBase.SceneTransition;
 
 public class clickToEventIssue : MonoBehaviour {
 
