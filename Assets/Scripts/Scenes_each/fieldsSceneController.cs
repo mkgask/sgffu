@@ -49,13 +49,13 @@ public class fieldsSceneController : MonoBehaviour
         GameObject terrain_gameobject = GameObject.Find("Terrain");
         TerrainConfig terrain_config = TerrainConfigFactory.loadFile(TerrainConfigFactory.createDefault());
         WorldConfig world_config = (SceneService.transition_scene_data as WorldCreated).world_config;
-        Debug.Log("World Name: " + world_config.world_name);
-        Debug.Log("seed: " + world_config.terrain_seed);
+        //Debug.Log("World Name: " + world_config.world_name);
+        //Debug.Log("seed: " + world_config.terrain_seed);
 
         TerrainService.reset(terrain_gameobject, terrain_config, world_config);
         TerrainService.update(0, 0, terrain_config.texture_filepath);
 
-        Debug.Log(StrOpe.i + "Receive: playerTerrainChunkMove: reservation");
+        //Debug.Log(StrOpe.i + "Receive: playerTerrainChunkMove: reservation");
         MessageBroker.Default.Receive<playerTerrainChunkMove>().Subscribe(x => {
             Debug.Log(StrOpe.i + "Receive: playerTerrainChunkMove: " + x.x + " , " + x.z);
             TerrainService.update(x.x, x.z, terrain_config.texture_filepath);
@@ -69,8 +69,10 @@ public class fieldsSceneController : MonoBehaviour
     public void PlayerCreate()
     {
         PlayerConfig player_config = PlayerConfigFactory.loadFile(PlayerConfigFactory.createDefault());
+        Debug.Log("player_config.player_fbx_filepath: " + player_config.player_fbx_filepath);
 
-        if (!((new File()).exist(player_config.player_fbx_filepath))) {
+        if (!((new File()).resourceExist(player_config.player_fbx_filepath + ".prefab")) &&
+                !((new File()).resourceExist(player_config.player_fbx_filepath + ".fbx"))) {
             throw new System.Exception("fieldsSceneController::PlayerCreate(): player_config.player_fbx_filepath file not found.");
         }
 
