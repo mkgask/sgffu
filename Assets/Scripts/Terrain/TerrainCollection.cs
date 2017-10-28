@@ -70,8 +70,8 @@ namespace OwrBase.Terrain {
                     if (this[x, z] != null) {
                         //Log.write("TerrainCollections.update: " + x + " , " + z + " : exist");
                     } else {
-                        Debug.Log(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
-                        Log.write(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
+                        //Debug.Log(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
+                        //Log.write(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
                         this[x, z] = new TerrainEntity(x, z, this.game_object, this.param, seed);
 
                         // SetNeibors
