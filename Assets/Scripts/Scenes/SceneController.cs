@@ -1,7 +1,7 @@
 using UnityEngine;
 using UniRx;
 using OwrBase.Scene;
-using OwrBase.SceneTransition;
+using OwrBase.EventMessage;
 using OwrBase.World;
 
 public class SceneController : MonoBehaviour

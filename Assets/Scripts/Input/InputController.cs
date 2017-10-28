@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using OwrBase.Input;
-using OwrBase.SceneTransition;
+using OwrBase.EventMessage;
 
 public class InputController : MonoBehaviour {
 
