@@ -1,5 +1,6 @@
 using UnityEngine;
 using OwrBase.Utility;
+using OwrBase.Filesystem;
 using UnityTerrain = UnityEngine.Terrain;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
@@ -34,8 +35,8 @@ namespace OwrBase.Terrain {
             TerrainData tData = new TerrainData();
             float actual_chunk_size = chunk_size / (Mathf.Max(chunk_size / 64, 0.5f) * 2);
 
-            Debug.Log("chunk_size: " + chunk_size);
-            Debug.Log("actual_chunk_size: " + actual_chunk_size);
+            //Debug.Log("chunk_size: " + chunk_size);
+            //Debug.Log("actual_chunk_size: " + actual_chunk_size);
 
             tData.size = new Vector3(actual_chunk_size, this.terrain_height, actual_chunk_size);
             tData.heightmapResolution = chunk_size;
@@ -94,22 +95,14 @@ namespace OwrBase.Terrain {
 
             for (x = 0; x < height_map_width; x += 1) {
                 for (z = 0; z < height_map_height; z += 1) {
-                    //float xx = rand.calucurate_perlin_value((base_x + x), seed, perlin_noise_scale);
-                    //float zz = rand.calucurate_perlin_value((base_z + z), seed, perlin_noise_scale);
-                    //Debug.Log(StrOpe.i + x + " : " + z + " : " + zz + " : " + xx);
-                    //Log.write(StrOpe.i + x + " : " + z + " : " + zz + " : " + xx);
+                    //float xx = Rand.calucurate_perlin_value((base_x + x), seed, perlin_noise_scale);
+                    //float zz = Rand.calucurate_perlin_value((base_z + z), seed, perlin_noise_scale);
                     heights[z, x] = Mathf.PerlinNoise(
                         Rand.calucurate_perlin_value((base_x + x), seed, perlin_noise_scale),
                         Rand.calucurate_perlin_value((base_z + z), seed, perlin_noise_scale)
-                        //zz, xx
-                        //rand.calucurate_perlin_value((base_z + z), seed, perlin_noise_scale),
-                        //rand.calucurate_perlin_value((base_x + x), seed, perlin_noise_scale)
-                        //(base_z + z) * perlin_noise_scale,
-                        //(base_x + x) * perlin_noise_scale
+                        //xx, zz
                     );
-                    //Log.write(StrOpe.i + x + " : " + z + " : heights[x, z] : " + heights[x, z]);
-
-                    //Debug.Log("heights: " + x + ", " + z + " : " + heights[x,z]);
+                    //Log.write("heights: " + x + ", " + z + " : " + heights[z, x]);
 
                 }
             }
