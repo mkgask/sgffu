@@ -39,7 +39,7 @@ public class newGameSceneController : MonoBehaviour {
 
         // world/新規World名.jsonの存在チェック
         // 存在したらエラー生成して関数終了
-        if (ConfigFile.exist(StrOpe.i + "Configs/Worlds/" + world_name + ".json")) {
+        if (ConfigFile.exist(StrOpe.i + "/Configs/Worlds/" + world_name + ".json")) {
             GameObject world_name_err_obj = GameObject.FindGameObjectWithTag("WorldNameExistErrorMessage");
             Text err_text = world_name_err_obj.GetComponent<Text>();
             err_text.text = "このワールド名は既に存在します。";
