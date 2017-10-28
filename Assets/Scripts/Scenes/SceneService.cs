@@ -98,7 +98,7 @@ namespace OwrBase.Scene {
 
         static IEnumerator<AsyncOperation> sceneLoader(string scene_name)
         {
-            yield return SceneManager.LoadSceneAsync(loading_scene_name, LoadSceneMode.Additive);
+            SceneManager.LoadScene(loading_scene_name, LoadSceneMode.Additive);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(loading_scene_name));
 
             yield return SceneManager.LoadSceneAsync(scene_name, LoadSceneMode.Additive);
