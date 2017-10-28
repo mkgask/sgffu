@@ -61,7 +61,15 @@ namespace OwrBase.Filesystem {
         /// </returns>
         public bool exist(string filename)
         {
-            string path = StrOpe.i + Application.dataPath + filename;
+            string path = StrOpe.i + Application.dataPath + "/" + filename;
+            //Debug.Log("exist: path: " + path);
+            return System.IO.File.Exists(path);
+        }
+
+        public bool resourceExist(string filename)
+        {
+            string path = StrOpe.i + Application.dataPath + "/Resources/" + filename;
+            //Debug.Log("resource_exist: path: " + path);
             return System.IO.File.Exists(path);
         }
 
