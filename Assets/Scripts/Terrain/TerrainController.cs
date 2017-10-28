@@ -1,8 +1,7 @@
 using UnityEngine;
 using UniRx;
 using OwrBase.Config;
-using OwrBase.Event;
-using OwrBase.SceneTransition;
+using OwrBase.EventMessage;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
 namespace OwrBase.Terrain {

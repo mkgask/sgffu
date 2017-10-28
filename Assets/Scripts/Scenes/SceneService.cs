@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using OwrBase.Exception;
 
 namespace OwrBase.Scene {
-    using OwrBase.SceneTransition;
+    using OwrBase.EventMessage;
 
     public class SceneService
     {
