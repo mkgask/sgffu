@@ -11,8 +11,6 @@ namespace OwrBase.Terrain {
 
         private TerrainService terrains;
 
-        public int chunk_num_offset = 0;
-
         public int chunk_effective_range = 0;  // 1 or 2
 
         public int chunk_size = 0;
@@ -35,7 +33,6 @@ namespace OwrBase.Terrain {
         void Start()
         {
             TerrainConfig terrain_param_default = new TerrainConfig {
-                chunk_num_offset = this.chunk_num_offset,
                 chunk_effective_range = this.chunk_effective_range,
                 chunk_size = this.chunk_size,
                 terrain_height = this.terrain_height,

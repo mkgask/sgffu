@@ -1,4 +1,7 @@
 using UnityEngine;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using OwrBase.Filesystem;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
@@ -8,7 +11,8 @@ namespace OwrBase.Terrain {
     {
         private GameObject game_object;
         private TerrainConfig param;
-        private TerrainEntity[,] entities_base_layer;
+
+        private List<TerrainEntity> entities = new List<TerrainEntity>();
 
 
         private int preview_left_top_x = 0;
@@ -22,10 +26,6 @@ namespace OwrBase.Terrain {
         {
             this.game_object = game_object;
             this.param = param;
-            int size = param.chunk_size + param.chunk_num_offset;
-            this.entities_base_layer = new TerrainEntity[size, size];
-
-            //Debug.Log("construct: x, z: " + size + ", " + size);
         }
 
 
@@ -33,26 +33,16 @@ namespace OwrBase.Terrain {
         public TerrainEntity this[int x, int z]
         {
             set {
-                int ax = x + (this.param.chunk_num_offset / 2);
-                int az = z + (this.param.chunk_num_offset / 2);
-
-                if (ax < 0 || entities_base_layer.GetLength(0) <= ax ||
-                        az < 0 || entities_base_layer.GetLength(1) <= az) {
-                    return;
-                }
+                int index = entities.FindIndex(entity => entity.position_x == x && entity.position_z == z);
                 
-                entities_base_layer[ax, az] = value;
+                if (-1 < index) {
+                    entities[index] = value;
+                } else {
+                    entities.Add(value);
+                }
             }
             get {
-                int ax = x + (this.param.chunk_num_offset / 2);
-                int az = z + (this.param.chunk_num_offset / 2);
-
-                if (ax < 0 || entities_base_layer.GetLength(0) <= ax ||
-                        az < 0 || entities_base_layer.GetLength(1) <= az) {
-                    return null;
-                }
-                
-                return entities_base_layer[ax, az];
+                return entities.FirstOrDefault(entity => entity.position_x == x && entity.position_z == z);
             }
         }
 
@@ -60,18 +50,11 @@ namespace OwrBase.Terrain {
 
         public void update(int left_top_x, int left_top_z, int right_bottom_x, int right_bottom_z, Texture2D texture, float terrain_seed)
         {
-            //Log.write("TerrainCollections.update: funchead: preview: " + preview_left_top_x + " , " + preview_left_top_z + " : " + preview_right_bottom_x + " , " + preview_right_bottom_z);
-            //Log.write("TerrainCollections.update: args: " + left_top_x + " , " + left_top_z + " : " + right_bottom_x + " , " + right_bottom_z);
-
             for(int x = left_top_x; x <= right_bottom_x; x += 1) {
                 for (int z = left_top_z; z <= right_bottom_z; z += 1) {
 
                     // ベースレイヤーが存在していなかったら生成
-                    if (this[x, z] != null) {
-                        //Log.write("TerrainCollections.update: " + x + " , " + z + " : exist");
-                    } else {
-                        //Debug.Log(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
-                        //Log.write(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
+                    if (this[x, z] == null) {
                         this[x, z] = new TerrainEntity(x, z, this.game_object, this.param, terrain_seed);
 
                         // SetNeibors
@@ -88,7 +71,6 @@ namespace OwrBase.Terrain {
 
                     // 有効レイヤーでなかったら有効化
                     if (!this[x, z].status()) {
-                        //Log.write("TerrainCollections.update: " + x + " , " + z + " : enable");
                         this[x, z].enable();
                     }
 

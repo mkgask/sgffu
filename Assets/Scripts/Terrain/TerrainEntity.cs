@@ -14,9 +14,9 @@ namespace OwrBase.Terrain {
 
         private UnityTerrain terrain = null;
 
-        private int position_x;
+        public int position_x = int.MinValue;
 
-        private int position_z;
+        public int position_z = int.MinValue;
 
         private float[,] height_map;
 

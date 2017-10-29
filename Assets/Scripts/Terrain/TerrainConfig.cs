@@ -3,8 +3,6 @@ using UnityEngine;
 namespace OwrBase.Terrain {
     public class TerrainConfig {
 
-        public int chunk_num_offset = 0;
-
         public int chunk_effective_range = 0;
 
         public int chunk_size = 0;

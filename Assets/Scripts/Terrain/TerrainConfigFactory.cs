@@ -6,7 +6,6 @@ namespace OwrBase.Terrain {
         public static TerrainConfig createDefault()
         {
             return new TerrainConfig {
-                chunk_num_offset = 1024,
                 chunk_effective_range = 2,
                 chunk_size = 64,
                 terrain_height = 128,
