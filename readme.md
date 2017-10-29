@@ -14,7 +14,7 @@ This project is a trial version before the alpha version.
 - grounds texture.
 
 
-### Usage:
+### Usage
 
 1. Download or "git clone --recursive" this repository. (and extract)
 
@@ -74,5 +74,5 @@ git submoduleに設定しているAssets/Pluginsディレクトリ以下の外�
 
 ### 操作方法
 
-WASDで前後左右に動きます。
+WASDで前後左右に動きます。  
 マウスの左ボタンドラッグでカメラがプレイヤーを中心に回転します。ホイールで拡大縮小できます。
