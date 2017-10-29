@@ -1,6 +1,6 @@
 using UniRx;
 using UnityEngine;
-using OwrBase.EventMessage;
+using OwrBase.EventMessage.Actions;
 
 namespace OwrBase.Characters.Input {
 

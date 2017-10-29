@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UniRx;
-using OwrBase.EventMessage;
+using OwrBase.EventMessage.Actions;
 
 namespace OwrBase.Input {
 //using Messanger = OwrBase.Messanger.Messanger;
