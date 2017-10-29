@@ -23,7 +23,7 @@ namespace OwrBase.Terrain {
         private float terrain_height;
 
 
-        public TerrainEntity(int x, int z, GameObject parent, TerrainConfig param, uint seed)
+        public TerrainEntity(int x, int z, GameObject parent, TerrainConfig param, float terrain_seed)
         {
             this.position_x = x;
             this.position_z = z;
@@ -50,7 +50,7 @@ namespace OwrBase.Terrain {
                 tData.heightmapWidth,
                 tData.heightmapHeight,
                 param.perlin_noise_scale,
-                seed
+                terrain_seed
             );
 
             this.height_map = heights;
@@ -86,7 +86,7 @@ namespace OwrBase.Terrain {
 
 
 
-        public float[,] fillHeights(int base_x, int base_z, int height_map_width, int height_map_height, float perlin_noise_scale, uint seed)
+        public float[,] fillHeights(int base_x, int base_z, int height_map_width, int height_map_height, float perlin_noise_scale, float terrain_seed)
         {
             int x = 0;
             int z = 0;
@@ -98,8 +98,8 @@ namespace OwrBase.Terrain {
                     //float xx = Rand.calucurate_perlin_value((base_x + x), seed, perlin_noise_scale);
                     //float zz = Rand.calucurate_perlin_value((base_z + z), seed, perlin_noise_scale);
                     heights[z, x] = Mathf.PerlinNoise(
-                        Rand.calucurate_perlin_value((base_x + x), seed, perlin_noise_scale),
-                        Rand.calucurate_perlin_value((base_z + z), seed, perlin_noise_scale)
+                        Rand.calucurate_perlin_value((base_x + x), terrain_seed, perlin_noise_scale),
+                        Rand.calucurate_perlin_value((base_z + z), terrain_seed, perlin_noise_scale)
                         //xx, zz
                     );
                     //Log.write("heights: " + x + ", " + z + " : " + heights[z, x]);

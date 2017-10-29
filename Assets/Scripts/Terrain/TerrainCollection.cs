@@ -58,7 +58,7 @@ namespace OwrBase.Terrain {
 
 
 
-        public void update(int left_top_x, int left_top_z, int right_bottom_x, int right_bottom_z, Texture2D texture, uint seed)
+        public void update(int left_top_x, int left_top_z, int right_bottom_x, int right_bottom_z, Texture2D texture, float terrain_seed)
         {
             //Log.write("TerrainCollections.update: funchead: preview: " + preview_left_top_x + " , " + preview_left_top_z + " : " + preview_right_bottom_x + " , " + preview_right_bottom_z);
             //Log.write("TerrainCollections.update: args: " + left_top_x + " , " + left_top_z + " : " + right_bottom_x + " , " + right_bottom_z);
@@ -72,7 +72,7 @@ namespace OwrBase.Terrain {
                     } else {
                         //Debug.Log(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
                         //Log.write(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : create");
-                        this[x, z] = new TerrainEntity(x, z, this.game_object, this.param, seed);
+                        this[x, z] = new TerrainEntity(x, z, this.game_object, this.param, terrain_seed);
 
                         // SetNeibors
                         this[x, z].setNeighbors(

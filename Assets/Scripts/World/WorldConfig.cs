@@ -5,7 +5,9 @@ namespace OwrBase.World {
 
         public string world_name;
 
-        public uint terrain_seed;
+        public uint seed;
+
+        public float terrain_seed;
 
     }
 

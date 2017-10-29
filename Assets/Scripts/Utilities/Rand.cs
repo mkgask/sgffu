@@ -30,12 +30,9 @@ namespace OwrBase.Utility {
 
 
 
-        public static float calucurate_perlin_value(int pos, uint seed, float scale)
+        public static float calucurate_perlin_value(int pos, float terrain_seed, float scale)
         {
-            var n = (seed / Mathf.Pow(10, seed.ToString().Length)) + (pos * scale);
-            //Log.write(StrOpe.i + pos + " : " + n);
-            return n;
-            //return ((uint)(pos * 50) + seed) % 30000 * scale;
+            return terrain_seed + (pos * scale);
         }
 
 
