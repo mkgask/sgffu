@@ -7,6 +7,8 @@ namespace OwrBase.Terrain {
 
         public int chunk_size = 0;
 
+        public float actual_chunk_size = 0;
+
         public float terrain_height = 0f;
 
         public int base_map_resolution = 0;

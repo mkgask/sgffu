@@ -1,7 +1,8 @@
 using UnityEngine;
 using System;
 using System.Linq;
-using System.Collections.Generic;
+using System.Collections;
+//using System.Collections.Generic;
 using OwrBase.Filesystem;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
@@ -12,12 +13,22 @@ namespace OwrBase.Terrain {
         private GameObject game_object;
         private TerrainConfig param;
 
-        private List<TerrainEntity> entities = new List<TerrainEntity>();
+        private TerrainEntity[,] entities;
 
+        //private List<TerrainEntity> entities = new List<TerrainEntity>();
+
+        //private const int terrain_chunk_offset = Int32.MaxValue / 2;
+
+        private const int terrain_chunk_max = 6180;
+
+        private const int terrain_chunk_offset = terrain_chunk_max / 2;
 
         private int preview_left_top_x = 0;
+
         private int preview_left_top_z = 0;
+
         private int preview_right_bottom_x = 0;
+
         private int preview_right_bottom_z = 0;
 
 
@@ -26,6 +37,7 @@ namespace OwrBase.Terrain {
         {
             this.game_object = game_object;
             this.param = param;
+            this.entities = new TerrainEntity[terrain_chunk_max,terrain_chunk_max];
         }
 
 
@@ -33,6 +45,16 @@ namespace OwrBase.Terrain {
         public TerrainEntity this[int x, int z]
         {
             set {
+                int ax = x + terrain_chunk_offset;
+                int az = z + terrain_chunk_offset;
+
+                if (ax < 0 || terrain_chunk_max < ax ||
+                        az < 0 || terrain_chunk_max < az) {
+                    return;
+                }
+
+                entities[ax, az] = value;
+/*
                 int index = entities.FindIndex(entity => entity.position_x == x && entity.position_z == z);
                 
                 if (-1 < index) {
@@ -40,9 +62,19 @@ namespace OwrBase.Terrain {
                 } else {
                     entities.Add(value);
                 }
+*/
             }
             get {
-                return entities.FirstOrDefault(entity => entity.position_x == x && entity.position_z == z);
+                int ax = x + terrain_chunk_offset;
+                int az = z + terrain_chunk_offset;
+
+                if (ax < 0 || terrain_chunk_max < ax ||
+                        az < 0 || terrain_chunk_max < az) {
+                    return null;
+                }
+
+                return entities[ax, az];
+                //return entities.FirstOrDefault(entity => entity.position_x == x && entity.position_z == z);
             }
         }
 
@@ -85,8 +117,8 @@ namespace OwrBase.Terrain {
                             left_top_z <= z && z <= right_bottom_z) {
                         continue;
                     }
-                    Debug.Log(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : disble");
-                    Log.write(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : disable");
+                    //Debug.Log(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : disble");
+                    //Log.write(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : disable");
                     this[x, z].disable();
                 }
             }
