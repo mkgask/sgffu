@@ -1,7 +1,8 @@
 using UnityEngine;
 using OwrBase.Terrain;
 using OwrBase.Filesystem;
-
+using OwrBase.EventMessage;
+using UniRx;
 
 namespace OwrBase.Characters.Player
 {
@@ -42,6 +43,9 @@ namespace OwrBase.Characters.Player
             // キャラ位置の設定
             float center_y = TerrainService.getHeight(0f, 0f);
             go.transform.position = new Vector3(0f, center_y + 1f, 0f);
+
+            MessageBroker.Default.Publish(new PlayerCreated{});
+
         }
     }
 

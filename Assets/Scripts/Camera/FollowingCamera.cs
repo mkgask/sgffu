@@ -1,4 +1,6 @@
 using UnityEngine;
+using OwrBase.EventMessage;
+using UniRx;
 
 /// <summary>
 /// The camera added this script will follow the specified object.
@@ -8,7 +10,7 @@ using UnityEngine;
 public class FollowingCamera : MonoBehaviour
 {
     public GameObject target; // an object to follow
-    public Vector3 offset = new Vector3(0f, 2f, 0f); // offset form the target object
+    public Vector3 offset = new Vector3(0f, 2.5f, -2f); // offset form the target object
 
     //[SerializeField] private float distance = 4.0f; // distance from following object
     [SerializeField] private float distance = 2.0f; // distance from following object
@@ -16,26 +18,34 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField] private float azimuthalAngle = 45.0f; // angle with x-axis
 
     [SerializeField] private float minDistance = 1.0f;
-    [SerializeField] private float maxDistance = 7.0f;
+    [SerializeField] private float maxDistance = 30.0f;
     [SerializeField] private float minPolarAngle = 5.0f;
     [SerializeField] private float maxPolarAngle = 75.0f;
     [SerializeField] private float mouseXSensitivity = 5.0f;
     [SerializeField] private float mouseYSensitivity = 5.0f;
     [SerializeField] private float scrollSensitivity = 5.0f;
 
+
     void Start()
     {
-        this.target = GameObject.FindGameObjectWithTag("Player");
+        MessageBroker.Default.Receive<TerrainCreated>().Subscribe(x => {
+            this.target = GameObject.FindGameObjectWithTag("Player");
 
-        if (this.target == null) {
-            throw new System.Exception("FollowingCamera::Start(): Player GameObject is not found.");
-        }
+            if (this.target == null) {
+                throw new System.Exception("FollowingCamera::Start(): Player GameObject is not found.");
+            }
 
-        this.transform.position = this.target.transform.position + new Vector3(0f, 2.5f, -2f);
-        
-        var lookAtPos = this.target.transform.position + this.offset;
-        this.updatePosition(lookAtPos);
-        transform.LookAt(lookAtPos);
+            this.transform.position = this.target.transform.position + new Vector3(0f, 0f, 0f);
+            
+            var lookAtPos = this.target.transform.position + this.offset;
+            this.updatePosition(lookAtPos);
+            transform.LookAt(lookAtPos);
+
+            this.enabled = true;
+        });
+
+        this.enabled = false;
+
     }
 
     void LateUpdate()

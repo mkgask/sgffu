@@ -48,10 +48,12 @@ namespace OwrBase.Terrain {
 
 
 
-        public void update(int left_top_x, int left_top_z, int right_bottom_x, int right_bottom_z, Texture2D texture, float terrain_seed)
+        public IEnumerator update(int left_top_x, int left_top_z, int right_bottom_x, int right_bottom_z, Texture2D texture, float terrain_seed)
         {
             for(int x = left_top_x; x <= right_bottom_x; x += 1) {
                 for (int z = left_top_z; z <= right_bottom_z; z += 1) {
+
+                    yield return new WaitForSeconds(0);
 
                     // ベースレイヤーが存在していなかったら生成
                     if (this[x, z] == null) {

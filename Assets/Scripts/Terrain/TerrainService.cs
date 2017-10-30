@@ -1,7 +1,10 @@
 using System.Text;
+using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 using OwrBase.Config;
 using OwrBase.World;
+using OwrBase.EventMessage;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
 namespace OwrBase.Terrain {
@@ -25,6 +28,28 @@ namespace OwrBase.Terrain {
             TerrainService.terrain_collection = new TerrainCollection(game_object, terrain_config);
         }
 
+        public static void first_create(int center_x, int center_z, string texture_filepath)
+        {
+            Texture2D texture = ConfigData.instantiate_texture2D(
+                StrOpe.i + "/Resources/" + texture_filepath,
+                TerrainService.terrain_config.detail_resolution,
+                TerrainService.terrain_config.detail_resolution
+            );
+
+            Observable.FromCoroutine(() => 
+                TerrainService.terrain_collection.update(
+                    center_x - TerrainService.chunk_effective_range,
+                    center_z - TerrainService.chunk_effective_range,
+                    center_x + TerrainService.chunk_effective_range,
+                    center_z + TerrainService.chunk_effective_range,
+                    texture,
+                    TerrainService.world_config.terrain_seed
+                )
+            ).Subscribe(x =>
+                MessageBroker.Default.Publish(new TerrainCreated{})
+            );
+        }
+
         public static void update(int center_x, int center_z, string texture_filepath)
         {
             Texture2D texture = ConfigData.instantiate_texture2D(
@@ -33,13 +58,15 @@ namespace OwrBase.Terrain {
                 TerrainService.terrain_config.detail_resolution
             );
 
-            TerrainService.terrain_collection.update(
-                center_x - TerrainService.chunk_effective_range,
-                center_z - TerrainService.chunk_effective_range,
-                center_x + TerrainService.chunk_effective_range,
-                center_z + TerrainService.chunk_effective_range,
-                texture,
-                TerrainService.world_config.terrain_seed
+            MainThreadDispatcher.StartUpdateMicroCoroutine(
+                TerrainService.terrain_collection.update(
+                    center_x - TerrainService.chunk_effective_range,
+                    center_z - TerrainService.chunk_effective_range,
+                    center_x + TerrainService.chunk_effective_range,
+                    center_z + TerrainService.chunk_effective_range,
+                    texture,
+                    TerrainService.world_config.terrain_seed
+                )
             );
         }
 
