@@ -14,9 +14,9 @@ namespace OwrBase.Terrain {
 
         private UnityTerrain terrain = null;
 
-        public int position_x = int.MinValue;
+        public int position_x = 0;
 
-        public int position_z = int.MinValue;
+        public int position_z = 0;
 
         private float[,] height_map;
 
@@ -33,12 +33,12 @@ namespace OwrBase.Terrain {
             this.terrain_height = param.terrain_height;
 
             TerrainData tData = new TerrainData();
-            float actual_chunk_size = chunk_size / (Mathf.Max(chunk_size / 64, 0.5f) * 2);
+            //float actual_chunk_size = chunk_size / (Mathf.Max(chunk_size / 64, 0.5f) * 2);
 
             //Debug.Log("chunk_size: " + chunk_size);
             //Debug.Log("actual_chunk_size: " + actual_chunk_size);
 
-            tData.size = new Vector3(actual_chunk_size, this.terrain_height, actual_chunk_size);
+            tData.size = new Vector3(param.actual_chunk_size, this.terrain_height, param.actual_chunk_size);
             tData.heightmapResolution = chunk_size;
             tData.baseMapResolution = param.base_map_resolution;
             tData.SetDetailResolution(param.detail_resolution, param.resolution_per_path);
