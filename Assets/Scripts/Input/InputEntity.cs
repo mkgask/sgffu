@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 
 namespace OwrBase.Input {
-    public class InputEvent {
+
+    public class InputEntity
+    {
 
         public string name = "";
 
@@ -10,8 +12,5 @@ namespace OwrBase.Input {
 
         public Type type = Type.None;
 
-        public bool key_value = false;
-
-        public float axis_value = 0f;
     }
 }

@@ -2,7 +2,7 @@ namespace OwrBase.Input {
 
     public struct Actions {
         public const string MainAction = "MainAction";  // Mayinly mouse button left
-        public const string SubAction = "SubAction";  // Mainly mouse button right
+        public const string SubAction = "SubAction";  // Sub mouse button right
         public const string FocusAction = "FocusAction";  // Action to thing in front
 
         public const string Jump = "Jump";
@@ -23,6 +23,12 @@ namespace OwrBase.Input {
         public const string Skill = "Skill";
         public const string Map = "Map";
 
+    }
+
+    public struct Mouse {
+        public const string X = "Mouse X";
+        public const string Y = "Mouse Y";
+        public const string Wheel = "Mouse ScrollWheel";
     }
 
 }

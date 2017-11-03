@@ -29,5 +29,6 @@ namespace OwrBase.Characters {
         void OffLeft();
         void OffRight();
         
+        void OnAxis(string axis_name, float value);
     }
 }

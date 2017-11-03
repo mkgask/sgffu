@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour, IControlCharacter
     private bool left_key = false;
     private bool right_key = false;
 
+    private float mouse_x = 0f;
+    private float mouse_y = 0f;
+    private float mouse_wheel = 0f;
 
 
     private int terrain_chunk_size = 1;
@@ -29,6 +32,8 @@ public class PlayerController : MonoBehaviour, IControlCharacter
     private int terrain_chunk_x = 0;
     private int terrain_chunk_z = 0;
 
+    private float rotate_x_sensitive = 2f;
+    private float rotate_y_sensitive = 2f;
 
 
     float player_move_speed_front = 0.2f;
@@ -53,11 +58,19 @@ public class PlayerController : MonoBehaviour, IControlCharacter
 	public void Update () {
 		if (this.window_open) { return; }
 
-        Vector3 char_move = this.updatePreInput();
-        this.updatePostCharaMove(char_move);
+        //this.characterRotation(this.getRotateValue());
+        this.characterMove(this.getMoveValue());
 	}
 
-    private Vector3 updatePreInput() {
+    private Vector3 getRotateValue() {
+        return new Vector3(mouse_x, mouse_y, 0f);
+    }
+
+    private void characterRotation(Vector3 rotate) {
+        this.transform.Rotate(0f, rotate.x * rotate_x_sensitive, 0f);
+    }
+
+    private Vector3 getMoveValue() {
         Vector3 move = new Vector3(0f, 0f, 0f);
 
         if (this.up_key) {
@@ -79,14 +92,14 @@ public class PlayerController : MonoBehaviour, IControlCharacter
         return move;
     }
 
-    private void updatePostCharaMove(Vector3 move) {
+    private void characterMove(Vector3 move) {
         this.transform.position += move;
 
         int chunk_x = (int)(this.transform.position.x / this.terrain_chunk_size);
         int chunk_z = (int)(this.transform.position.z / this.terrain_chunk_size);
         if (terrain_chunk_x != chunk_x || terrain_chunk_z != chunk_z) {
-            Debug.Log(StrOpe.i + "updatePostCharaMove: " + chunk_x + " , " + chunk_z + " : " + this.terrain_chunk_x + " , " + this.terrain_chunk_z);
-            Log.write(StrOpe.i + "updatePostCharaMove: " + chunk_x + " , " + chunk_z + " : " + this.terrain_chunk_x + " , " + this.terrain_chunk_z);
+            //Debug.Log(StrOpe.i + "updatePostCharaMove: " + chunk_x + " , " + chunk_z + " : " + this.terrain_chunk_x + " , " + this.terrain_chunk_z);
+            //Log.write(StrOpe.i + "updatePostCharaMove: " + chunk_x + " , " + chunk_z + " : " + this.terrain_chunk_x + " , " + this.terrain_chunk_z);
             //Log.write("Publish: playerTerrainChunkMove");
             MessageBroker.Default.Publish<playerTerrainChunkMove>(new playerTerrainChunkMove {
                 x = chunk_x,
@@ -239,6 +252,15 @@ public class PlayerController : MonoBehaviour, IControlCharacter
     public void OffRight()
     {
         this.right_key = false;
+    }
+
+    public void OnAxis(string axis_name, float value)
+    {
+        switch(axis_name) {
+            case OwrBase.Input.Mouse.X: this.mouse_x = value; break;
+            case OwrBase.Input.Mouse.Y: this.mouse_y = value; break;
+            case OwrBase.Input.Mouse.Wheel: this.mouse_wheel = value; break;
+        }
     }
 
 }
