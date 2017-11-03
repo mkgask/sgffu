@@ -36,7 +36,7 @@ And If you not found Assets/Plugins/ under each directory, please downloads each
 
 ### Player control
 
-It moves front, left, back, right with WASD.  
+It moves front, left, back, right with WASD, And dash with left shift.  
 The camera moves around the player with mouse move, and zoom in / zoom out with mouse wheel.
 
 ---
@@ -74,5 +74,5 @@ git submoduleに設定しているAssets/Pluginsディレクトリ以下の外�
 
 ### 操作方法
 
-WASDで前後左右に動きます。  
+WASDで前後左右に動き、左シフトを押しっぱなしにするとダッシュになります。
 マウス操作でカメラがプレイヤーを中心に回転します。ホイールで拡大縮小できます。
