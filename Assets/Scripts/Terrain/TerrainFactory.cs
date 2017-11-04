@@ -10,7 +10,6 @@ namespace OwrBase.Terrain
 
     public class TerrainFactory
     {
-
         const string terrain_gameobject_name = "Terrain";
 
         public static void create()

@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections;
-//using System.Collections.Generic;
 using OwrBase.Filesystem;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
@@ -14,10 +13,6 @@ namespace OwrBase.Terrain {
         private TerrainConfig param;
 
         private TerrainEntity[,] entities;
-
-        //private List<TerrainEntity> entities = new List<TerrainEntity>();
-
-        //private const int terrain_chunk_offset = Int32.MaxValue / 2;
 
         private const int terrain_chunk_max = 6180;
 
@@ -54,15 +49,6 @@ namespace OwrBase.Terrain {
                 }
 
                 entities[ax, az] = value;
-/*
-                int index = entities.FindIndex(entity => entity.position_x == x && entity.position_z == z);
-                
-                if (-1 < index) {
-                    entities[index] = value;
-                } else {
-                    entities.Add(value);
-                }
-*/
             }
             get {
                 int ax = x + terrain_chunk_offset;
@@ -74,7 +60,6 @@ namespace OwrBase.Terrain {
                 }
 
                 return entities[ax, az];
-                //return entities.FirstOrDefault(entity => entity.position_x == x && entity.position_z == z);
             }
         }
 
@@ -85,7 +70,7 @@ namespace OwrBase.Terrain {
             for(int x = left_top_x; x <= right_bottom_x; x += 1) {
                 for (int z = left_top_z; z <= right_bottom_z; z += 1) {
 
-                    yield return new WaitForSeconds(0);
+                    yield return null;
 
                     // ベースレイヤーが存在していなかったら生成
                     if (this[x, z] == null) {
@@ -117,8 +102,6 @@ namespace OwrBase.Terrain {
                             left_top_z <= z && z <= right_bottom_z) {
                         continue;
                     }
-                    //Debug.Log(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : disble");
-                    //Log.write(StrOpe.i + "TerrainCollections.update: " + x + " , " + z + " : disable");
                     this[x, z].disable();
                 }
             }
