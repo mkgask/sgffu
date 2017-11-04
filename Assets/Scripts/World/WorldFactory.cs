@@ -1,10 +1,10 @@
 using UniRx;
-using OwrBase.Terrain;
-using OwrBase.EventMessage;
-using OwrBase.Characters.Player;
+using sgffu.Terrain;
+using sgffu.EventMessage;
+using sgffu.Characters.Player;
 
 
-namespace OwrBase.World
+namespace sgffu.World
 {
 
     class WorldFactory

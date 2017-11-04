@@ -1,4 +1,4 @@
-namespace OwrBase.Exception {
+namespace sgffu.Exception {
 
     [System.Serializable]
     public class SceneDoubleLoadException : System.Exception

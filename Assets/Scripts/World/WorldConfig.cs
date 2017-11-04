@@ -1,5 +1,5 @@
 ﻿
-namespace OwrBase.World {
+namespace sgffu.World {
 
     public class WorldConfig {
 

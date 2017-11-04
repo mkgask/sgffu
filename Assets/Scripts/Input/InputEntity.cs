@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace OwrBase.Input {
+namespace sgffu.Input {
 
     public class InputEntity
     {

@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using OwrBase.Filesystem;
-using OwrBase.Exception;
+using sgffu.Filesystem;
+using sgffu.Exception;
 
-namespace OwrBase.Config {
+namespace sgffu.Config {
 
     /// <summary>
     /// 設定情報処理クラス

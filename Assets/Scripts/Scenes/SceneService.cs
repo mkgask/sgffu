@@ -3,10 +3,10 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using OwrBase.Exception;
+using sgffu.Exception;
 
-namespace OwrBase.Scene {
-    using OwrBase.EventMessage;
+namespace sgffu.Scene {
+    using sgffu.EventMessage;
 
     public class SceneService
     {

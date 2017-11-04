@@ -2,12 +2,12 @@ using System.Text;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
-using OwrBase.Config;
-using OwrBase.World;
-using OwrBase.EventMessage;
+using sgffu.Config;
+using sgffu.World;
+using sgffu.EventMessage;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
-namespace OwrBase.Terrain {
+namespace sgffu.Terrain {
 
     public class TerrainService
     {

@@ -1,4 +1,4 @@
-namespace OwrBase.Characters {
+namespace sgffu.Characters {
     public interface IControlCharacterAction
     {
         void OnMainAciton();

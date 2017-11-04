@@ -1,5 +1,5 @@
 
-namespace OwrBase.Exception {
+namespace sgffu.Exception {
 
     [System.Serializable]
     public class Texture2DdontLoadException : System.Exception

@@ -1,10 +1,10 @@
 using UniRx;
 using UnityEngine;
-using OwrBase.Input;
-using OwrBase.Characters;
-using OwrBase.EventMessage;
+using sgffu.Input;
+using sgffu.Characters;
+using sgffu.EventMessage;
 
-namespace OwrBase.Characters.Input {
+namespace sgffu.Characters.Input {
 
     public class PlayerInputControlAction
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
-using OwrBase.Input;
+using sgffu.Input;
 using System.Collections.Generic;
 
-namespace OwrBase.EventMessage {
+namespace sgffu.EventMessage {
     public class InputEvent
     {
 

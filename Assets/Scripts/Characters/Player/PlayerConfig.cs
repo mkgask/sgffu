@@ -1,5 +1,5 @@
 
-namespace OwrBase.Characters.Player {
+namespace sgffu.Characters.Player {
 
     public class PlayerConfig {
 

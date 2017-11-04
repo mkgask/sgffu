@@ -1,10 +1,10 @@
 using UnityEngine;
-using OwrBase.Utility;
-using OwrBase.Filesystem;
+using sgffu.Utility;
+using sgffu.Filesystem;
 using UnityTerrain = UnityEngine.Terrain;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
-namespace OwrBase.Terrain {
+namespace sgffu.Terrain {
 
     public class TerrainEntity {
 

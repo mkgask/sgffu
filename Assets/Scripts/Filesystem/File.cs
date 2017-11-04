@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
-namespace OwrBase.Filesystem {
+namespace sgffu.Filesystem {
     
     /// <summary>
     /// ファイル操作クラス

@@ -1,7 +1,7 @@
 using UnityEngine;
-using OwrBase.EventMessage;
-using OwrBase.Characters;
-using OwrBase.Characters.Input;
+using sgffu.EventMessage;
+using sgffu.Characters;
+using sgffu.Characters.Input;
 using UniRx;
 
 /// <summary>
@@ -102,9 +102,9 @@ public class FollowingCamera : MonoBehaviour, IControlCharacterAxis
     public void OnAxis(string axis_name, float value)
     {
         switch(axis_name) {
-            case OwrBase.Input.Mouse.X: this.mouse_x = value; break;
-            case OwrBase.Input.Mouse.Y: this.mouse_y = value; break;
-            case OwrBase.Input.Mouse.Wheel: this.mouse_wheel = value; break;
+            case sgffu.Input.Mouse.X: this.mouse_x = value; break;
+            case sgffu.Input.Mouse.Y: this.mouse_y = value; break;
+            case sgffu.Input.Mouse.Wheel: this.mouse_wheel = value; break;
         }
     }
 }

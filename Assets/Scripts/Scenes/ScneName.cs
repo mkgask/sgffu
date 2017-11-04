@@ -1,5 +1,5 @@
 
-namespace OwrBase.Scene {
+namespace sgffu.Scene {
 
     public struct SceneName
     {

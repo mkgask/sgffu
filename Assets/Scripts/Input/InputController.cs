@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-using OwrBase.Input;
-using OwrBase.EventMessage;
+using sgffu.Input;
+using sgffu.EventMessage;
 
 public class InputController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		OwrBase.Input.Service.init();
+		sgffu.Input.Service.init();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		OwrBase.Input.Service.inputCheck();
+		sgffu.Input.Service.inputCheck();
 	}
 }

@@ -1,5 +1,5 @@
 
-namespace OwrBase.Input {
+namespace sgffu.Input {
 
     public enum Type {
         None,

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UniRx;
-using OwrBase.Scene;
-using OwrBase.EventMessage;
+using sgffu.Scene;
+using sgffu.EventMessage;
 
 public class quitSceneController : MonoBehaviour {
 /*

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace OwrBase.Filesystem {
+namespace sgffu.Filesystem {
     
     /// <summary>
     /// ログファイル操作クラス

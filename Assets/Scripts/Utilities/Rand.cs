@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using OwrBase.Filesystem;
+using sgffu.Filesystem;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
-namespace OwrBase.Utility {
+namespace sgffu.Utility {
     public class Rand {
 
         public static uint xorshift(int base_numeric)

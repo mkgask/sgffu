@@ -2,11 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
-using OwrBase.Config;
-using OwrBase.Utility;
-using OwrBase.Scene;
-using OwrBase.EventMessage;
-using OwrBase.World;
+using sgffu.Config;
+using sgffu.Utility;
+using sgffu.Scene;
+using sgffu.EventMessage;
+using sgffu.World;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
 public class newGameSceneController : MonoBehaviour {

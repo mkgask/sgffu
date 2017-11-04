@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace OwrBase.Filesystem {
+namespace sgffu.Filesystem {
 
     /// <summary>
     /// ディレクトリ操作クラス

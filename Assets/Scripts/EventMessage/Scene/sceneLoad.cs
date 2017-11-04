@@ -1,4 +1,4 @@
-namespace OwrBase.EventMessage {
+namespace sgffu.EventMessage {
     public class sceneLoad : SceneTransition
     {
     }

@@ -1,6 +1,6 @@
-﻿using OwrBase.Config;
+﻿using sgffu.Config;
 
-namespace OwrBase.Characters.Player {
+namespace sgffu.Characters.Player {
 
     public class PlayerConfigFactory {
 

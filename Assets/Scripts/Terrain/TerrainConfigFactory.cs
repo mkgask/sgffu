@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using OwrBase.Config;
+using sgffu.Config;
 
-namespace OwrBase.Terrain {
+namespace sgffu.Terrain {
     public class TerrainConfigFactory {
 
         public static TerrainConfig createDefault()

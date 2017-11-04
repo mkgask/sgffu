@@ -1,4 +1,4 @@
-namespace OwrBase.Input {
+namespace sgffu.Input {
 
     public struct Actions {
         public const string MainAction = "MainAction";  // Mayinly mouse button left

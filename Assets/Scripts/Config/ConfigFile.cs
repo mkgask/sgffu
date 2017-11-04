@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Utf8Json;
-using OwrBase.Filesystem;
+using sgffu.Filesystem;
 
-namespace OwrBase.Config {
+namespace sgffu.Config {
 
     /// <summary>
     /// コンフィグファイル処理クラス

@@ -1,10 +1,10 @@
 using UnityEngine;
-using OwrBase.Terrain;
-using OwrBase.Filesystem;
-using OwrBase.EventMessage;
+using sgffu.Terrain;
+using sgffu.Filesystem;
+using sgffu.EventMessage;
 using UniRx;
 
-namespace OwrBase.Characters.Player
+namespace sgffu.Characters.Player
 {
         
     public class PlayerFactory

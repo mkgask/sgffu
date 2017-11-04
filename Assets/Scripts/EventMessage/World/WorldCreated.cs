@@ -1,6 +1,6 @@
-using OwrBase.World;
+using sgffu.World;
 
-namespace OwrBase.EventMessage {
+namespace sgffu.EventMessage {
     public class WorldCreated : sceneLoad {
 
         public WorldConfig world_config;

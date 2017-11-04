@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OwrBase.Terrain {
+namespace sgffu.Terrain {
     public class TerrainConfig {
 
         public int chunk_effective_range = 0;

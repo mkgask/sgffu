@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using OwrBase.Config;
+using sgffu.Config;
 
-namespace OwrBase.Input {
+namespace sgffu.Input {
 
     public class InputConfigFactory
     {
