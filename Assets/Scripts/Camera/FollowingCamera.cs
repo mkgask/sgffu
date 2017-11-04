@@ -8,7 +8,7 @@ using UniRx;
 /// The camera added this script will follow the specified object.
 /// The camera can be moved by left mouse drag and mouse wheel.
 /// </summary>
-[ExecuteInEditMode, DisallowMultipleComponent]
+[DisallowMultipleComponent]
 public class FollowingCamera : MonoBehaviour, IControlCharacterAxis
 {
     public GameObject target; // an object to follow

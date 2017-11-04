@@ -2,6 +2,7 @@ using UniRx;
 using UnityEngine;
 using OwrBase.Input;
 using OwrBase.Characters;
+using OwrBase.EventMessage;
 
 namespace OwrBase.Characters.Input {
 

@@ -1,8 +1,10 @@
 using UnityEngine;
+using OwrBase.Input;
 using System.Collections.Generic;
 
-namespace OwrBase.Input {
-    public class InputEvent {
+namespace OwrBase.EventMessage {
+    public class InputEvent
+    {
 
         public string name = "";
 
