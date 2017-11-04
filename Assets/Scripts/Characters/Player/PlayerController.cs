@@ -8,9 +8,9 @@ using OwrBase.Characters.Input;
 using OwrBase.Characters.Player;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
-public class PlayerController : MonoBehaviour, IControlCharacter
+public class PlayerController : MonoBehaviour, IControlCharacterAction
 {
-    PlayerInputControl input_controller;
+    PlayerInputControlAction input_controller;
 
     private bool in_action = false;
 
@@ -22,19 +22,20 @@ public class PlayerController : MonoBehaviour, IControlCharacter
     private bool left_key = false;
     private bool right_key = false;
 
-    private float mouse_x = 0f;
-    private float mouse_y = 0f;
-    private float mouse_wheel = 0f;
-
 
     private int terrain_chunk_size = 1;
 
     private int terrain_chunk_x = 0;
     private int terrain_chunk_z = 0;
 
+/*
+    private float mouse_x = 0f;
+    private float mouse_y = 0f;
+    private float mouse_wheel = 0f;
+
     private float rotate_x_sensitive = 2f;
     private float rotate_y_sensitive = 2f;
-
+*/
 
     float player_move_speed_front = 0.2f;
     float player_move_speed_back = -0.1f;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour, IControlCharacter
 
 	// Use this for initialization
 	public void Start () {
-        input_controller = new PlayerInputControl(this);
+        input_controller = new PlayerInputControlAction(this);
         this.terrain_chunk_size = TerrainService.terrain_config.chunk_size;
         //Log.write(StrOpe.i + "terrain_chunk_size: " + this.terrain_chunk_size);
 	}
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour, IControlCharacter
         //this.characterRotation(this.getRotateValue());
         this.characterMove(this.getMoveValue());
 	}
-
+/*
     private Vector3 getRotateValue() {
         return new Vector3(mouse_x, mouse_y, 0f);
     }
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour, IControlCharacter
     private void characterRotation(Vector3 rotate) {
         this.transform.Rotate(0f, rotate.x * rotate_x_sensitive, 0f);
     }
-
+*/
     private Vector3 getMoveValue() {
         Vector3 move = new Vector3(0f, 0f, 0f);
 
@@ -253,14 +254,5 @@ public class PlayerController : MonoBehaviour, IControlCharacter
     {
         this.right_key = false;
     }
-
-    public void OnAxis(string axis_name, float value)
-    {
-        switch(axis_name) {
-            case OwrBase.Input.Mouse.X: this.mouse_x = value; break;
-            case OwrBase.Input.Mouse.Y: this.mouse_y = value; break;
-            case OwrBase.Input.Mouse.Wheel: this.mouse_wheel = value; break;
-        }
-    }
-
+    
 }

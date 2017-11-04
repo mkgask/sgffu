@@ -1,5 +1,5 @@
 namespace OwrBase.Characters {
-    public interface IControlCharacter
+    public interface IControlCharacterAction
     {
         void OnMainAciton();
         void OnSubAction();
@@ -29,6 +29,9 @@ namespace OwrBase.Characters {
         void OffLeft();
         void OffRight();
         
+    }
+
+    public interface IControlCharacterAxis {
         void OnAxis(string axis_name, float value);
     }
 }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using OwrBase.EventMessage;
+using OwrBase.Characters;
+using OwrBase.Characters.Input;
 using UniRx;
 
 /// <summary>
@@ -7,10 +9,12 @@ using UniRx;
 /// The camera can be moved by left mouse drag and mouse wheel.
 /// </summary>
 [ExecuteInEditMode, DisallowMultipleComponent]
-public class FollowingCamera : MonoBehaviour
+public class FollowingCamera : MonoBehaviour, IControlCharacterAxis
 {
     public GameObject target; // an object to follow
     public Vector3 offset = new Vector3(0f, 2.5f, -2f); // offset form the target object
+
+    PlayerInputControlAxis input_controller;
 
     //[SerializeField] private float distance = 4.0f; // distance from following object
     [SerializeField] private float distance = 2.0f; // distance from following object
@@ -25,9 +29,15 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField] private float mouseYSensitivity = 5.0f;
     [SerializeField] private float scrollSensitivity = 5.0f;
 
+    private float mouse_x = 0f;
+    private float mouse_y = 0f;
+    private float mouse_wheel = 0f;
+
 
     void Start()
     {
+        input_controller = new PlayerInputControlAxis(this);
+
         MessageBroker.Default.Receive<TerrainCreated>().Subscribe(x => {
             this.target = GameObject.FindGameObjectWithTag("Player");
 
@@ -51,10 +61,13 @@ public class FollowingCamera : MonoBehaviour
     void LateUpdate()
     {
         //if (Input.GetMouseButton(0)) {
-            this.updateAngle(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            //this.updateAngle(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         //}
 
-        this.updateDistance(Input.GetAxis("Mouse ScrollWheel"));
+        //this.updateDistance(Input.GetAxis("Mouse ScrollWheel"));
+
+        this.updateAngle(this.mouse_x, this.mouse_y);
+        this.updateDistance(this.mouse_wheel);
 
         var lookAtPos = this.target.transform.position + this.offset;
         this.updatePosition(lookAtPos);
@@ -84,5 +97,14 @@ public class FollowingCamera : MonoBehaviour
             lookAtPos.x + this.distance * Mathf.Sin(dp) * Mathf.Cos(da),
             lookAtPos.y + this.distance * Mathf.Cos(dp),
             lookAtPos.z + this.distance * Mathf.Sin(dp) * Mathf.Sin(da));
+    }
+
+    public void OnAxis(string axis_name, float value)
+    {
+        switch(axis_name) {
+            case OwrBase.Input.Mouse.X: this.mouse_x = value; break;
+            case OwrBase.Input.Mouse.Y: this.mouse_y = value; break;
+            case OwrBase.Input.Mouse.Wheel: this.mouse_wheel = value; break;
+        }
     }
 }
