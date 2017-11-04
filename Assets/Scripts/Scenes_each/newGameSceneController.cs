@@ -9,12 +9,13 @@ using sgffu.EventMessage;
 using sgffu.World;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
-public class newGameSceneController : MonoBehaviour {
+public class newGameSceneController : MonoBehaviour
+{
 /*
     // Use this for initialization
     void Start()
     {
-
+        //MessageBroker.Default.Publish(new sceneChange { sceneName = "fields" });
 	}
 
 	// Update is called once per frame
@@ -23,12 +24,6 @@ public class newGameSceneController : MonoBehaviour {
 
     }
 */
-    public void Start()
-    {
-        /* MessageBroker.Default.Publish(new sceneChange { sceneName = "fields" }); */
-    }
-
-
 
     public void OnWorldCreate()
     {
@@ -48,16 +43,8 @@ public class newGameSceneController : MonoBehaviour {
         }
 
         // World名からシード値生成
-        uint seed = Rand.xorshift(world_name);
-        //Debug.Log("seed: " + seed);
-/*
-        // world/新規World名.jsonにWorld名とシード値を保存
-        ConfigData.worldConfig = new WorldConfig {
-            world_name = world_name,
-            terrain_seed = seed
-        };
-*/
-        //MessageBroker.Default.Publish(new WorldCreateStart { world_config = new WorldConfig{} });
+        uint seed = Rand.xorshift(world_name, 10000f);
+
         MessageBroker.Default.Publish(new WorldCreated {
             scene_name = SceneName.fields,
             world_config = WorldConfigFactory.create(world_name, seed)
