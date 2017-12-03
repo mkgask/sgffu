@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using sgffu.Config;
 
-namespace sgffu.Terrain {
-    public class TerrainConfigFactory
+namespace sgffu.Terrain
+{
+    public class TerrainConfigRepository
     {
         public static TerrainConfig createDefault()
         {
@@ -21,11 +22,16 @@ namespace sgffu.Terrain {
             };
         }
 
-        public static TerrainConfig loadFile(TerrainConfig terrain_config_default)
+        public static TerrainConfig get(TerrainConfig terrain_config_default)
         {
             TerrainConfig terrain_config = ConfigFile.load<TerrainConfig>(ConfigFile.terrainConfigFilename, terrain_config_default);
             terrain_config.actual_chunk_size = calcurate_actual_chunk_size(terrain_config.chunk_size);
             return terrain_config;
+        }
+
+        public static bool set(TerrainConfig terrain_config)
+        {
+            return ConfigFile.save<TerrainConfig>(ConfigFile.terrainConfigFilename, terrain_config);
         }
 
         public static float calcurate_actual_chunk_size(int chunk_size) {

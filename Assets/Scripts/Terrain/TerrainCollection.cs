@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 using sgffu.Filesystem;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
@@ -9,114 +10,37 @@ namespace sgffu.Terrain {
 
     public class TerrainCollection
     {
-        private GameObject game_object;
-        private TerrainConfig param;
+        public Dictionary<long, Dictionary<long, TerrainEntity>> entities = new Dictionary<long, Dictionary<long, TerrainEntity>>();
 
-        private TerrainEntity[,] entities;
+        //public int[] test = new int[long.MaxValue];
 
-        private const int terrain_chunk_max = 6180;
+        public int terrain_chunk_size = 0;
 
-        private const int terrain_chunk_offset = terrain_chunk_max / 2;
+        public int terrain_chunk_offset = 0;
 
-        private int preview_left_top_x = 0;
+        public int terrain_pos_start = 0;
 
-        private int preview_left_top_z = 0;
-
-        private int preview_right_bottom_x = 0;
-
-        private int preview_right_bottom_z = 0;
-
-
-
-        public TerrainCollection(GameObject game_object, TerrainConfig param)
-        {
-            this.game_object = game_object;
-            this.param = param;
-            this.entities = new TerrainEntity[terrain_chunk_max,terrain_chunk_max];
-        }
-
-
-
-        public TerrainEntity this[int x, int z]
+        public int terrain_pos_end = 0;
+        
+        public TerrainEntity this[long x, long z]
         {
             set {
-                int ax = x + terrain_chunk_offset;
-                int az = z + terrain_chunk_offset;
-
-                if (ax < 0 || terrain_chunk_max < ax ||
-                        az < 0 || terrain_chunk_max < az) {
+                if (!entities.ContainsKey(x)) {
+                    entities.Add(x, new Dictionary<long, TerrainEntity>());
+                }
+                if (!entities[x].ContainsKey(z)) {
+                    entities[x].Add(z, value);
                     return;
                 }
-
-                entities[ax, az] = value;
+                entities[x][z] = value;
             }
             get {
-                int ax = x + terrain_chunk_offset;
-                int az = z + terrain_chunk_offset;
-
-                if (ax < 0 || terrain_chunk_max < ax ||
-                        az < 0 || terrain_chunk_max < az) {
+                try {
+                    return entities[x][z];
+                } catch(KeyNotFoundException e) {
                     return null;
                 }
-
-                return entities[ax, az];
             }
-        }
-
-
-
-        public IEnumerator update(int left_top_x, int left_top_z, int right_bottom_x, int right_bottom_z, Texture2D texture, float terrain_seed)
-        {
-            for(int x = left_top_x; x <= right_bottom_x; x += 1) {
-                for (int z = left_top_z; z <= right_bottom_z; z += 1) {
-
-                    yield return null;
-
-                    // ベースレイヤーが存在していなかったら生成
-                    if (this[x, z] == null) {
-                        this[x, z] = new TerrainEntity(x, z, this.game_object, this.param, terrain_seed);
-
-                        // SetNeibors
-                        this[x, z].setNeighbors(
-                            this[x - 1, z],
-                            this[x, z + 1],
-                            this[x + 1, z],
-                            this[x, z - 1]
-                        );
-
-                        // SetTextures
-                        this[x, z].setTexture(texture, this.param);
-                    }
-
-                    // 有効レイヤーでなかったら有効化
-                    if (!this[x, z].status()) {
-                        this[x, z].enable();
-                    }
-
-                }
-            }
-
-            for(int x = preview_left_top_x; x <= preview_right_bottom_x; x += 1) {
-                for (int z = preview_left_top_z; z <= preview_right_bottom_z; z += 1) {
-                    if (left_top_x <= x && x <= right_bottom_x &&
-                            left_top_z <= z && z <= right_bottom_z) {
-                        continue;
-                    }
-                    this[x, z].disable();
-                }
-            }
-
-            preview_left_top_x = left_top_x;
-            preview_left_top_z = left_top_z;
-            preview_right_bottom_x = right_bottom_x;
-            preview_right_bottom_z = right_bottom_z;
-        }
-
-        public float getHeight(float x, float z)
-        {
-            int pos_x = Mathf.FloorToInt(x);
-            int pos_z = Mathf.FloorToInt(z);
-            return this[pos_x, pos_z].getHeight(x - pos_x, z - pos_z);
         }
 
     }

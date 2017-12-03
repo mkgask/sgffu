@@ -4,125 +4,46 @@ using sgffu.Filesystem;
 using UnityTerrain = UnityEngine.Terrain;
 using StrOpe = StringOperationUtil.OptimizedStringOperation;
 
-namespace sgffu.Terrain {
+namespace sgffu.Terrain
+{
+    public class TerrainEntityCore
+    {
+        public int pos_x { get; protected set; } = int.MinValue;
 
-    public class TerrainEntity {
+        public int pos_z { get; protected set; } = int.MinValue;
 
-        public bool enabled = false;
+        public float[,] height_map { get; protected set; } = new float[0,0];
 
-        private GameObject game_object = null;
+        public float terrain_height { get; protected set; } = float.MinValue;
 
-        private UnityTerrain terrain = null;
+    }
 
-        public int position_x = 0;
+    public class TerrainEntity : TerrainEntityCore
+    {
 
-        public int position_z = 0;
+        public GameObject game_object { get; private set; } = null;
 
-        private float[,] height_map;
+        public UnityTerrain terrain  { get; private set; } = null;
 
-        private float terrain_height;
-
-
-        public TerrainEntity(int x, int z, GameObject parent, TerrainConfig param, float terrain_seed)
-        {
-            this.position_x = x;
-            this.position_z = z;
-            this.game_object = this.create_game_object(x, z, parent);
-
-            int chunk_size = param.chunk_size;
-            this.terrain_height = param.terrain_height;
-
-            TerrainData tData = new TerrainData();
-            //float actual_chunk_size = chunk_size / (Mathf.Max(chunk_size / 64, 0.5f) * 2);
-
-            //Debug.Log("chunk_size: " + chunk_size);
-            //Debug.Log("actual_chunk_size: " + actual_chunk_size);
-
-            tData.size = new Vector3(param.actual_chunk_size, this.terrain_height, param.actual_chunk_size);
-            tData.heightmapResolution = chunk_size;
-            tData.baseMapResolution = param.base_map_resolution;
-            tData.SetDetailResolution(param.detail_resolution, param.resolution_per_path);
-
-            float[,] heights = tData.GetHeights(0, 0, tData.heightmapWidth, tData.heightmapHeight);
-            heights = this.fillHeights(
-                x * chunk_size,
-                z * chunk_size,
-                tData.heightmapWidth,
-                tData.heightmapHeight,
-                param.perlin_noise_scale,
-                terrain_seed
-            );
-
-            this.height_map = heights;
-            tData.SetHeights(0, 0, heights);
-
-            TerrainCollider tCollider = game_object.GetComponent<TerrainCollider>();
-            tCollider.terrainData = tData;
-            terrain.terrainData = tData;
-
-            this.game_object.transform.position = new Vector3(x * chunk_size, 0f, z * chunk_size);
-
-/*
-            terrain.terrainData.wavingGrassAmount = 5f;
-            terrain.terrainData.wavingGrassSpeed = 5f;
-            terrain.terrainData.wavingGrassStrength = 5f;
-            terrain.terrainData.wavingGrassTint = new Color(0.5f, 1.0f, 0.5f, 0.5f);
-*/
+        public TerrainEntity(int x, int z, float[,] height_map, float terrain_height,
+            GameObject game_object, UnityTerrain terrain
+        ) {
+            this.pos_x = x;
+            this.pos_z = z;
+            this.height_map = height_map;
+            this.terrain_height = terrain_height;
+            this.game_object = game_object;
+            this.terrain = terrain;
         }
-
-
-
-        public GameObject create_game_object(int x, int z, GameObject parent)
-        {
-            if (this.game_object) { return this.game_object; }
-
-            GameObject go = new GameObject("Terrain-" + x + "-" + z);
-            go.AddComponent<UnityTerrain>();
-            go.AddComponent<TerrainCollider>();
-            terrain = go.GetComponent<UnityTerrain>();
-            go.transform.SetParent(parent.transform);
-            return go;
-        }
-
-
-
-        public float[,] fillHeights(int base_x, int base_z, int height_map_width, int height_map_height, float perlin_noise_scale, float terrain_seed)
-        {
-            int x = 0;
-            int z = 0;
-
-            float [,] heights = new float[height_map_width, height_map_height];
-
-            for (x = 0; x < height_map_width; x += 1) {
-                for (z = 0; z < height_map_height; z += 1) {
-                    //float xx = Rand.calucurate_perlin_value((base_x + x), seed, perlin_noise_scale);
-                    //float zz = Rand.calucurate_perlin_value((base_z + z), seed, perlin_noise_scale);
-                    heights[z, x] = Mathf.PerlinNoise(
-                        Rand.calucurate_perlin_value((base_x + x), terrain_seed, perlin_noise_scale),
-                        Rand.calucurate_perlin_value((base_z + z), terrain_seed, perlin_noise_scale)
-                        //xx, zz
-                    );
-                    //Log.write("heights: " + x + ", " + z + " : " + heights[z, x]);
-
-                }
-            }
-
-            //Log.writeFloat2(heights);
-            return heights;
-        }
-
-
 
         public void enable()
         {
             this.game_object.SetActive(true);
-            this.enabled = true;
         }
 
         public void disable()
         {
             this.game_object.SetActive(false);
-            this.enabled = false;
         }
 
         public bool status()
@@ -147,11 +68,13 @@ namespace sgffu.Terrain {
             this.terrain.SetNeighbors(left_terrain, top_terrain, right_terrain, bottom_terrain);
         }
 
-        public void setTexture(Texture2D texture, TerrainConfig param)
+        public void setTexture(Texture2D texture, int chunk_size)
         {
+            Debug.Assert(0 < chunk_size);
+
             TerrainData tData = this.terrain.terrainData;
             Vector3 tDataSize = tData.size;
-            tData.alphamapResolution = param.chunk_size;
+            tData.alphamapResolution = chunk_size;
 
             SplatPrototype[] splatprototype = new SplatPrototype[1];
             splatprototype[0] = new SplatPrototype();
@@ -176,19 +99,19 @@ namespace sgffu.Terrain {
 
         public float getHeight(float offset_x, float offset_z)
         {
+            Debug.Assert(offset_x < 1f);
+            Debug.Assert(offset_z < 1f);
+            
             TerrainData tData = terrain.terrainData;
             int max_w = tData.heightmapWidth;
             int max_h = tData.heightmapHeight;
             int x = Mathf.FloorToInt(max_w * offset_x);
             int z = Mathf.FloorToInt(max_h * offset_z);
-/*
-            Debug.Log("TerrainEntity.get_height: offset_x: " + offset_x);
-            Debug.Log("TerrainEntity.get_height: offset_z: " + offset_z);
-            Debug.Log("TerrainEntity.get_height: x: " + x);
-            Debug.Log("TerrainEntity.get_height: z: " + z);
-            Debug.Log("TerrainEntity.get_height: this.height_map[x, z]: " + this.height_map[x, z]);
-*/
-            return this.height_map[x, z] * this.terrain_height;
+            //Debug.Log("TerrainService.getHeight: this.height_map[x, z]: " + this.height_map[x, z]);
+            //Debug.Log("TerrainService.getHeight: this.terrain_height: " + this.terrain_height);
+            float r = this.height_map[x, z] * this.terrain_height;
+            //Debug.Log("TerrainService.getHeight: r: " + r);
+            return r;
         }
 
     }

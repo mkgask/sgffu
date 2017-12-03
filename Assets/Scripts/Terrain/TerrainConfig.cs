@@ -7,7 +7,7 @@ namespace sgffu.Terrain {
 
         public int chunk_size = 0;
 
-        public float actual_chunk_size = 0;
+        public float actual_chunk_size = 0f;
 
         public float terrain_height = 0f;
 
@@ -19,7 +19,7 @@ namespace sgffu.Terrain {
 
         public float perlin_noise_scale = 0f;
 
-        public string texture_filepath;
+        public string texture_filepath = "";
 
     }
 }
