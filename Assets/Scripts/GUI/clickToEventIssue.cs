@@ -22,7 +22,8 @@ public class clickToEventIssue : MonoBehaviour {
     {
         if (nextScene == "") { return; }
         // シーン切り替えイベント発行
-        //Debug.Log("Event: Pulish: " + nextScene);
+        Debug.Log("clickToEventIssue.OnClick: " + nextScene);
         MessageBroker.Default.Publish(new sceneChange { scene_name = nextScene });
     }
+
 }

@@ -34,7 +34,7 @@ public class newGameSceneController : MonoBehaviour
 
         // world/新規World名.jsonの存在チェック
         // 存在したらエラー生成して関数終了
-        if (ConfigFile.exist(StrOpe.i + "Configs/Worlds/" + world_name + ".json")) {
+        if (ConfigFile.exist(StrOpe.i + "Configs/Worlds/" + world_name + "/world.json")) {
             GameObject world_name_err_obj = GameObject.FindGameObjectWithTag("WorldNameExistErrorMessage");
             Text err_text = world_name_err_obj.GetComponent<Text>();
             err_text.text = "このワールド名は既に存在します。";
@@ -45,9 +45,10 @@ public class newGameSceneController : MonoBehaviour
         // World名からシード値生成
         uint seed = Rand.xorshift(world_name, 10000f);
 
-        MessageBroker.Default.Publish(new WorldCreated {
+        MessageBroker.Default.Publish(new AllowWorldCreate {
             scene_name = SceneName.fields,
-            world_config = WorldConfigFactory.create(world_name, seed)
+            world_config = WorldConfigFactory.create(world_name, seed),
+            //additions = new string[] { SceneName.worldCreating },
         });
     }
 

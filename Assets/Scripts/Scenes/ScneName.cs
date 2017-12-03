@@ -18,6 +18,8 @@ namespace sgffu.Scene {
         public const string loading = "loading";
         
         public const string fields = "fields";
+
+        public const string worldCreating = "worldCreating";
     }
 
 }
