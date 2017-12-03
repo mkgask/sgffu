@@ -13,11 +13,13 @@ namespace sgffu.Filesystem {
         /// </summary>
         public static DirectoryInfo create(string path)
         {
-            if (Directory.Exists(path))
+            string dir = Path.GetDirectoryName(path);
+
+            if (Directory.Exists(dir))
             {
-                return new DirectoryInfo(path);
+                return new DirectoryInfo(dir);
             }
-            return Directory.CreateDirectory(path);
+            return Directory.CreateDirectory(dir);
         }
     }
 

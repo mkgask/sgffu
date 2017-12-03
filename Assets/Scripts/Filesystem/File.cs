@@ -38,18 +38,25 @@ namespace sgffu.Filesystem {
             this.path = StrOpe.i + Application.dataPath + filename;
             //Debug.Log("Terrain Texture2D filepath 2: " + this.path);
             string dir = Path.GetDirectoryName(this.path);
+/*
+            Debug.Log("path: " + path);
+            Debug.Log("dir: " + dir);
+            Debug.Log("Directory.Exists(dir): " + Directory.Exists(dir));
+*/
             if (!Directory.Exists(dir)) {
                 DirectoryInfo di = Directory.CreateDirectory(dir);
                 if (!di.Exists) {
                     return false;
                 }
             }
+
             if (!System.IO.File.Exists(this.path)) {
                 using (StreamWriter sw = System.IO.File.CreateText(path)) 
                 {
                     sw.WriteLine(default_content);
                 }	
             }
+
             return true;
         }
 
@@ -62,6 +69,7 @@ namespace sgffu.Filesystem {
         public bool exist(string filename)
         {
             string path = StrOpe.i + Application.dataPath + "/" + filename;
+            Dir.create(path);
             //Debug.Log("exist: path: " + path);
             return System.IO.File.Exists(path);
         }
