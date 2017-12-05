@@ -8,22 +8,21 @@ namespace sgffu.Terrain
 {
     public class TerrainEntityCore
     {
-        public int pos_x { get; protected set; } = int.MinValue;
+        public int pos_x = int.MinValue;
 
-        public int pos_z { get; protected set; } = int.MinValue;
+        public int pos_z = int.MinValue;
 
-        public float[,] height_map { get; protected set; } = new float[0,0];
+        public float[,] height_map = new float[0,0];
 
-        public float terrain_height { get; protected set; } = float.MinValue;
-
+        public float terrain_height = float.MinValue;
     }
 
     public class TerrainEntity : TerrainEntityCore
     {
 
-        public GameObject game_object { get; private set; } = null;
+        public GameObject game_object = null;
 
-        public UnityTerrain terrain  { get; private set; } = null;
+        public UnityTerrain terrain = null;
 
         public TerrainEntity(int x, int z, float[,] height_map, float terrain_height,
             GameObject game_object, UnityTerrain terrain
